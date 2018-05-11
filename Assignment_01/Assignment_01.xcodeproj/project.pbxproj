@@ -8,20 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		74505CED20A531930027B755 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74505CEC20A531930027B755 /* AppDelegate.swift */; };
-		74505CEF20A531930027B755 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74505CEE20A531930027B755 /* ViewController.swift */; };
+		74505CEF20A531930027B755 /* ConcentrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74505CEE20A531930027B755 /* ConcentrationViewController.swift */; };
 		74505CF220A531930027B755 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74505CF020A531930027B755 /* Main.storyboard */; };
 		74505CF420A531940027B755 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74505CF320A531940027B755 /* Assets.xcassets */; };
 		74505CF720A531940027B755 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74505CF520A531940027B755 /* LaunchScreen.storyboard */; };
+		74505CFF20A539BD0027B755 /* Concentration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74505CFE20A539BD0027B755 /* Concentration.swift */; };
+		74505D0120A53A510027B755 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74505D0020A53A510027B755 /* Card.swift */; };
+		74505D0420A550F60027B755 /* Emojis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74505D0320A550F60027B755 /* Emojis.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		74505CE920A531930027B755 /* Assignment_01.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assignment_01.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74505CEC20A531930027B755 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		74505CEE20A531930027B755 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		74505CEE20A531930027B755 /* ConcentrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcentrationViewController.swift; sourceTree = "<group>"; };
 		74505CF120A531930027B755 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		74505CF320A531940027B755 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		74505CF620A531940027B755 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		74505CF820A531940027B755 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		74505CFE20A539BD0027B755 /* Concentration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concentration.swift; sourceTree = "<group>"; };
+		74505D0020A53A510027B755 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		74505D0320A550F60027B755 /* Emojis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emojis.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,8 +61,11 @@
 			isa = PBXGroup;
 			children = (
 				74505CEC20A531930027B755 /* AppDelegate.swift */,
-				74505CEE20A531930027B755 /* ViewController.swift */,
+				74505CEE20A531930027B755 /* ConcentrationViewController.swift */,
 				74505CF020A531930027B755 /* Main.storyboard */,
+				74505CFE20A539BD0027B755 /* Concentration.swift */,
+				74505D0020A53A510027B755 /* Card.swift */,
+				74505D0320A550F60027B755 /* Emojis.swift */,
 				74505CF320A531940027B755 /* Assets.xcassets */,
 				74505CF520A531940027B755 /* LaunchScreen.storyboard */,
 				74505CF820A531940027B755 /* Info.plist */,
@@ -74,6 +83,7 @@
 				74505CE520A531930027B755 /* Sources */,
 				74505CE620A531930027B755 /* Frameworks */,
 				74505CE720A531930027B755 /* Resources */,
+				74505D0220A53AA40027B755 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -130,13 +140,32 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		74505D0220A53AA40027B755 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "KEYWORDS=\"TODO:|FIXME:|\\?\\?\\?:|\\!\\!\\!:\"\nfind ${SRCROOT} \\( -name \"*.h\" -or -name \"*.m\" -or -name \"*.swift\" \\) -print0 | \\\nxargs -0 egrep --with-filename --line-number --only-matching \"($KEYWORDS).*\\$\" | \\\nperl -p -e \"s/($KEYWORDS)/ warning: \\$1/\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		74505CE520A531930027B755 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74505CEF20A531930027B755 /* ViewController.swift in Sources */,
+				74505CEF20A531930027B755 /* ConcentrationViewController.swift in Sources */,
 				74505CED20A531930027B755 /* AppDelegate.swift in Sources */,
+				74505D0420A550F60027B755 /* Emojis.swift in Sources */,
+				74505CFF20A539BD0027B755 /* Concentration.swift in Sources */,
+				74505D0120A53A510027B755 /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,3 +7,26 @@
 //
 
 import Foundation
+
+struct Card {
+    
+    var isFaceUp = false
+    
+    var isMatched = false
+    
+    private(set) var identifier: Int
+    
+    private static var cardIndentifier = 0
+    
+    init() {
+        identifier = Card.getIdentifier()
+    }
+    
+    private static func getIdentifier() -> Int {
+        let identifier = cardIndentifier
+        cardIndentifier += 1
+        
+        return identifier
+    }
+    
+}

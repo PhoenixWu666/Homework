@@ -7,3 +7,17 @@
 //
 
 import Foundation
+
+class Emojis {
+    
+    private var emojis = ["👻", "💀", "☠️", "😈", "🎃", "🦇", "🍭", "🍬", "🧛🏻‍♀️", "🧟‍♂️", "🧙‍♀️", "🧟‍♀️"]
+    
+    func getEmoji(at: Int) -> String {
+        if at < emojis.count {
+            return emojis[at]
+        } else {
+            return "??"
+        }
+    }
+    
+}
