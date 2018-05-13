@@ -14,7 +14,11 @@ class ConcentrationViewController: UIViewController {
     
     @IBOutlet weak var flipCountLabel: UILabel!
     
-    private var flipCount = 0
+    private var flipCount = 0 {
+        didSet {
+            flipCountLabel.text = "Flips: \(flipCount)"
+        }
+    }
     
     lazy var game = Concentration(pairsOfCards: cardPairs)
     
@@ -29,21 +33,26 @@ class ConcentrationViewController: UIViewController {
         return (cardButtonCount / 2)
     }
     
-    @IBAction func touchCard(_ sender: UIButton) {
-        if let cardIndex = cardButtons.index(of: sender), let card = game.updateModel(at: cardIndex) {
-            if !card.isFaceUp {
-                flipCount += 1
-            }
+    fileprivate func updateViewModel() {
+        for index in cardButtons.indices {
+            let card = game.cards[index]
             
-            for cardButton in cardButtons {
-                if cardButtons.index(of: cardButton) == cardIndex {
-                    cardButton.setTitle(getEmoji(identifier: card.identifier), for: .normal)
-                    cardButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-                } else {
-                    cardButton.setTitle("", for: .normal)
-                    cardButton.backgroundColor = #colorLiteral(red: 0.9994830489, green: 0.6620230675, blue: 0.1431986988, alpha: 1)
-                }
+            if game.cards[index].isFaceUp {
+                cardButtons[index].setTitle(getEmoji(identifier: card.identifier), for: .normal)
+                cardButtons[index].backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            } else {
+                cardButtons[index].setTitle("", for: .normal)
+                cardButtons[index].backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0) : #colorLiteral(red: 0.9994830489, green: 0.6620230675, blue: 0.1431986988, alpha: 1)
             }
+        }
+    }
+    
+    @IBAction func touchCard(_ sender: UIButton) {
+        flipCount += 1
+        
+        if let cardIndex = cardButtons.index(of: sender) {
+            game.chooseCard(at: cardIndex)
+            updateViewModel()
         }
     }
     
@@ -59,12 +68,6 @@ class ConcentrationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print("card count: \(game.cards.count)")
-        
-        for card in game.cards {
-            print("card: \(card.identifier)")
-        }
     }
 
 

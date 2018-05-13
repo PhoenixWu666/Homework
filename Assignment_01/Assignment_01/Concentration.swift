@@ -12,7 +12,7 @@ struct Concentration {
     
     private(set) var cards = [Card]()
     
-    var indexOfOneAndOnlyOneCard: Int?
+    var indexOfOneAndFaceUpCard: Int?
     
     init(pairsOfCards: Int) {
         var tempCards = [Card]()
@@ -27,11 +27,23 @@ struct Concentration {
         }
     }
     
-    func updateModel(at: Int) -> Card? {
-        if at < cards.count {
-            return cards[at]
-        } else {
-            return nil
+    mutating func chooseCard(at: Int) {
+        if !cards[at].isMatched {
+            if let indexOnlyOne = indexOfOneAndFaceUpCard, indexOnlyOne != at {
+                if cards[at].identifier == cards[indexOnlyOne].identifier {
+                    cards[at].isMatched = true
+                    cards[indexOnlyOne].isMatched = true
+                }
+                
+                cards[at].isFaceUp = true
+                indexOfOneAndFaceUpCard = nil
+            } else {
+                for index in cards.indices {
+                    cards[index].isFaceUp = index == at
+                }
+                
+                indexOfOneAndFaceUpCard = at
+            }
         }
     }
     
