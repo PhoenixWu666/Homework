@@ -34,8 +34,14 @@ class ConcentrationViewController: UIViewController {
     }
     
     fileprivate func updateViewModel() {
+        var matchedCount = 0
+        
         for index in cardButtons.indices {
             let card = game.cards[index]
+            
+            if card.isMatched {
+                matchedCount += 1
+            }
             
             if game.cards[index].isFaceUp {
                 cardButtons[index].setTitle(getEmoji(identifier: card.identifier), for: .normal)
@@ -44,6 +50,10 @@ class ConcentrationViewController: UIViewController {
                 cardButtons[index].setTitle("", for: .normal)
                 cardButtons[index].backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0) : #colorLiteral(red: 0.9994830489, green: 0.6620230675, blue: 0.1431986988, alpha: 1)
             }
+        }
+        
+        if matchedCount == cardButtons.count {
+            // TODO: start new game
         }
     }
     
