@@ -15,6 +15,7 @@ struct Concentration {
     var indexOfOneAndFaceUpCard: Int?
     
     init(pairsOfCards: Int) {
+        Card.resetIdentifier()
         var tempCards = [Card]()
         
         for _ in 0..<pairsOfCards {

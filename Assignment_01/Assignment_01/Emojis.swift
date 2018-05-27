@@ -10,9 +10,31 @@ import Foundation
 
 class Emojis {
     
-    private var emojis = ["👻", "💀", "☠️", "😈", "🎃", "🦇", "🍭", "🍬", "🧛🏻‍♀️", "🧟‍♂️", "🧙‍♀️", "🧟‍♀️"]
+    private var emojis: [String]!
+    
+    private lazy var themes = [halloweenTheme, japaneseTheme, sportTheme, animalTheme, emojiTheme, weatherTheme]
+    
+    private var halloweenTheme = ["👻", "💀", "☠️", "😈", "🎃", "🦇", "🍭", "🍬", "🧛🏻‍♀️", "🧟‍♂️", "🧙‍♀️", "🧟‍♀️"]
+    
+    private var japaneseTheme = ["🌸", "🍱", "⛩", "🗻", "🏯", "🍢", "🍵", "🍶", "🌊", "🇯🇵", "💮", "🏮"]
+    
+    private var sportTheme = ["🥋", "⚾️", "🏹", "🎿", "🏀", "⚽️", "⛳️", "⛸", "🥊", "🏆", "🏓", "🎾"]
+    
+    private var animalTheme = ["🐤", "🐰", "🐹", "🐶", "🐱", "🦁", "🐵", "🐸", "🐯", "🐮", "🐷", "🦅"]
+    
+    private var emojiTheme = ["😂", "😍", "😜", "🤪", "🤬", "🤯", "🤫", "🤥", "😵", "😑", "😏", "🤤"]
+    
+    private var weatherTheme = ["❄️", "☃️", "⛄️", "🌬", "💧", "🌈", "🌧", "☁️", "🌪", "⛈", "⚡️", "🌩"]
+    
+    func refreshEmojiModel() {
+        emojis = themes[themes.count.arc4random]
+    }
     
     func getEmoji(at: Int) -> String {
+        if emojis == nil {
+            refreshEmojiModel()
+        }
+        
         if at < emojis.count {
             return emojis[at]
         } else {

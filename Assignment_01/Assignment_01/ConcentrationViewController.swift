@@ -53,7 +53,26 @@ class ConcentrationViewController: UIViewController {
         }
         
         if matchedCount == cardButtons.count {
-            // TODO: start new game
+            let alertController = UIAlertController(title: "Congratulations!", message: "新しいゲームを続けますか", preferredStyle: .alert)
+            
+            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { [unowned self] action in
+                self.newGame()
+            }))
+            
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            
+            present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    func newGame() {
+        self.emojis.refreshEmojiModel()
+        game = Concentration(pairsOfCards: cardPairs)
+        flippedCards.removeAll()
+        
+        DispatchQueue.main.async { [unowned self] in
+            self.updateViewModel()
+            self.flipCount = 0
         }
     }
     
@@ -75,11 +94,6 @@ class ConcentrationViewController: UIViewController {
             return flippedCards[identifier]!
         }
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
 
 }
 

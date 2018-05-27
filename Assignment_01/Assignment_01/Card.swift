@@ -29,4 +29,8 @@ struct Card {
         return identifier
     }
     
+    static func resetIdentifier() {
+        cardIndentifier = 0
+    }
+    
 }
