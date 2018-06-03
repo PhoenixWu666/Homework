@@ -14,6 +14,12 @@ struct Concentration {
     
     var indexOfOneAndFaceUpCard: Int?
     
+    private(set) var score: Int = 0 {
+        didSet {
+            score = score < 0 ? 0 : score
+        }
+    }
+    
     init(pairsOfCards: Int) {
         Card.resetIdentifier()
         var tempCards = [Card]()
@@ -34,6 +40,10 @@ struct Concentration {
                 if cards[at].identifier == cards[indexOnlyOne].identifier {
                     cards[at].isMatched = true
                     cards[indexOnlyOne].isMatched = true
+                    
+                    score += 2
+                } else {
+                    score -= 1
                 }
                 
                 cards[at].isFaceUp = true

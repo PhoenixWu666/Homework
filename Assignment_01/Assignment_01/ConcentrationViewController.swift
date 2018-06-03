@@ -33,8 +33,19 @@ class ConcentrationViewController: UIViewController {
         return (cardButtonCount / 2)
     }
     
+    @IBOutlet weak var scoreLabel: UILabel!
+    
+    private var score: Int! {
+        didSet {
+            if score != nil {
+                scoreLabel.text = "Score: \(score!)"
+            }
+        }
+    }
+    
     fileprivate func updateViewModel() {
         var matchedCount = 0
+        score = game.score
         
         for index in cardButtons.indices {
             let card = game.cards[index]
@@ -70,19 +81,23 @@ class ConcentrationViewController: UIViewController {
         game = Concentration(pairsOfCards: cardPairs)
         flippedCards.removeAll()
         
-        DispatchQueue.main.async { [unowned self] in
+        DispatchQueue.main.async {
             self.updateViewModel()
-            self.flipCount = 0
+            self.updateFlipCount(isReset: true)
         }
     }
     
     @IBAction func touchCard(_ sender: UIButton) {
-        flipCount += 1
+        updateFlipCount(isReset: false)
         
         if let cardIndex = cardButtons.index(of: sender) {
             game.chooseCard(at: cardIndex)
             updateViewModel()
         }
+    }
+    
+    private func updateFlipCount(isReset: Bool) {
+        flipCount = isReset ? 0 : flipCount + 1
     }
     
     private func getEmoji(identifier: Int) -> String {
